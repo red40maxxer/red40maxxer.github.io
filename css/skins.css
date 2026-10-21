@@ -1,0 +1,23 @@
+:root[data-skin="paper"] {
+  --background-color: #fbfbf8; --text-color: #16171a; --text-color-alt: #6b6d72; --background-color-alt: #ecece6;
+  --accent: #1f5fd1; --ok: #217a3c; --warn: #9a6100; --bad: #b3261e;
+  color-scheme: light;
+}
+
+:root[data-skin="phosphor"] {
+  --background-color: #0b0f0c; --text-color: #b6f2c4; --text-color-alt: #5f8f6b; --background-color-alt: #142019;
+  --accent: #e8ff8a; --ok: #7dff9e; --warn: #ffd166; --bad: #ff7b72;
+  color-scheme: dark;
+}
+
+:root[data-skin="amber"] {
+  --background-color: #120c02; --text-color: #ffb547; --text-color-alt: #a8752b; --background-color-alt: #22170a;
+  --accent: #ffd27a; --ok: #d9e36a; --warn: #ffd27a; --bad: #ff7a52;
+  color-scheme: dark;
+}
+
+:root[data-skin="solarized"] {
+  --background-color: #002b36; --text-color: #93a1a1; --text-color-alt: #657b83; --background-color-alt: #073642;
+  --accent: #268bd2; --ok: #859900; --warn: #b58900; --bad: #dc322f;
+  color-scheme: dark;
+}

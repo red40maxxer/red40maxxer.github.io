@@ -1,0 +1,39 @@
+.toc { list-style: none; padding: 0; }
+.toc li { position: relative; }
+.toc li + li { margin-top: 0; }
+.toc a {
+  display: flex;
+  gap: 1ch;
+  padding: 0 1ch;
+  color: var(--text-color);
+  text-decoration: none;
+}
+.toc a::before { content: ">"; color: var(--text-color-alt); }
+.toc a:hover, .toc a:focus-visible { background: var(--text-color); color: var(--background-color); outline: none; }
+.toc a:hover::before, .toc a:focus-visible::before { color: var(--background-color); }
+.toc a > * { margin-top: 0; }
+.toc-title { flex: 0 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; }
+.toc-dots { flex: 1 1 2ch; min-width: 2ch; overflow: hidden; white-space: nowrap; color: var(--text-color-alt); }
+.toc-dots::before { content: "................................................................................................................................................................"; }
+.toc-tag, .toc-date { flex: none; }
+.toc-tag { color: var(--text-color-alt); }
+.toc-tag::before { content: "["; }
+.toc-tag::after { content: "]"; }
+.toc a:hover .toc-dots, .toc a:focus-visible .toc-dots,
+.toc a:hover .toc-tag, .toc a:focus-visible .toc-tag { color: var(--background-color); }
+
+.toc-desc {
+  display: none;
+  position: absolute;
+  top: 100%;
+  margin-top: 0;
+  left: 3ch;
+  z-index: 5;
+  width: min(60ch, calc(100% - 3ch));
+  background: var(--background-color);
+  color: var(--text-color);
+  border: var(--border-thickness) solid var(--text-color);
+  box-shadow: 1ch calc(var(--line-height) / 2) 0 color-mix(in srgb, var(--text-color) 18%, transparent);
+  padding: calc(var(--line-height) / 2 - var(--border-thickness)) calc(1ch - var(--border-thickness));
+}
+.toc a:hover .toc-desc, .toc a:focus-visible .toc-desc { display: block; }

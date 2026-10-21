@@ -1,0 +1,93 @@
+/* MW's figure overflow-y: hidden would clip the tooltip */
+figure.chart { position: relative; margin: var(--line-height) 0; overflow: visible; }
+/* undo MW's "* + *" blank line between siblings */
+figure.chart * { margin-top: 0; }
+figure.chart th, figure.chart td { white-space: nowrap; }
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 2ch; }
+.chart-head .chart-title { font-weight: 700; }
+.chart-head .row { margin: 0; gap: 0 2ch; }
+.chart-foot { display: flex; flex-wrap: wrap; gap: 0 2ch; color: var(--text-color-alt); }
+.chart-foot .sw { display: inline-block; width: 2ch; height: 3px; vertical-align: middle; margin-right: 1ch; background: var(--c, var(--accent)); }
+.chart-table { max-height: calc(var(--line-height) * 12); overflow-y: auto; }
+
+.hbars { margin-bottom: var(--line-height); }
+.hbar { display: grid; grid-template-columns: var(--label-w, 4ch) minmax(0, 1fr) var(--val-w, 7ch); gap: 0 1ch; align-items: center; cursor: default; }
+.hbar:focus-visible { outline-offset: 0; }
+.hbar .label { overflow: hidden; text-overflow: clip; white-space: nowrap; }
+.hbar .track { height: var(--line-height); display: flex; align-items: center; min-width: 0; }
+.hbar .fill {
+  --c: var(--accent);
+  height: calc(var(--line-height) - 6px);
+  background: repeating-linear-gradient(to right, var(--c) 0 calc(1ch - 2px), transparent calc(1ch - 2px) 1ch);
+}
+.hbar .val { text-align: right; color: var(--text-color-alt); }
+.hbar.on .fill { --c: var(--text-color); }
+.hbar.on .label, .hbar.on .val { color: var(--text-color); font-weight: 700; }
+
+.plot { display: grid; grid-template-columns: 6ch minmax(0, 1fr); gap: 0 1ch; }
+.yaxis { text-align: right; color: var(--text-color-alt); }
+.yaxis span { display: block; height: var(--line-height); white-space: nowrap; }
+.area { position: relative; height: calc(var(--line-height) * (var(--rows, 8) + 1)); min-width: 0; cursor: crosshair; touch-action: pan-y; }
+.area .gl { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--text-color-alt); opacity: .45; }
+.area .gl.base { border-top: var(--border-thickness) solid var(--text-color); opacity: 1; }
+.area .cols { position: absolute; left: 0; right: 0; top: calc(var(--line-height) / 2); height: calc(var(--line-height) * var(--rows, 8)); display: flex; align-items: flex-end; }
+.col { flex: 0 0 1ch; width: 1ch; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.col i {
+  --c: var(--accent);
+  display: block;
+  width: calc(1ch - 2px);
+  background: color-mix(in srgb, var(--c) 22%, transparent);
+  border-top: 3px solid var(--c);
+}
+.col.alt i { --c: color-mix(in srgb, var(--accent) 40%, var(--background-color)); }
+.col.on { background: color-mix(in srgb, var(--text-color) 10%, transparent); }
+.col.on i { --c: var(--text-color); }
+.xaxis { margin-left: 7ch; white-space: pre; color: var(--text-color-alt); overflow: hidden; }
+
+.spark { display: inline-flex; align-items: flex-end; height: var(--line-height); vertical-align: top; }
+.spark span { width: 1ch; height: 100%; padding-block: 3px; display: flex; align-items: flex-end; justify-content: center; cursor: default; }
+.spark i { --c: var(--accent); display: block; width: calc(1ch - 2px); background: var(--c); min-height: 2px; }
+.spark span.on i { --c: var(--text-color); }
+.up { color: var(--ok); }
+.down { color: var(--bad); }
+
+.tip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--background-color);
+  color: var(--text-color);
+  border: var(--border-thickness) solid var(--text-color);
+  box-shadow: 1ch calc(var(--line-height) / 2) 0 color-mix(in srgb, var(--text-color) 18%, transparent);
+  padding: calc(var(--line-height) / 2 - var(--border-thickness)) calc(1ch - var(--border-thickness));
+  white-space: nowrap;
+}
+.tip b { display: block; }
+.tip .k { color: var(--text-color-alt); }
+
+.meter { display: grid; grid-template-columns: 12ch minmax(0, 1fr) 5ch; gap: 0 1ch; align-items: baseline; }
+.meter > * { margin-top: 0; }
+.meter + .meter { margin-top: 0; }
+.meter .bar { white-space: nowrap; overflow: hidden; color: var(--accent); }
+.meter .bar .empty { color: var(--text-color-alt); }
+.meter .pct { text-align: right; }
+@media (max-width: 600px) {
+  .meter { grid-template-columns: minmax(0, 1fr) 5ch; }
+  .meter .name { grid-column: 1 / -1; }
+}
+
+.layers-cap { min-height: calc(var(--line-height) * 3); }
+.layers-run + .layers-run { margin-top: var(--line-height); }
+.layers-scroll { overflow-x: auto; }
+.lrow { display: grid; grid-template-columns: var(--label-w, 19ch) max-content; gap: 0 1ch; height: var(--line-height); }
+.lname { white-space: pre; overflow: hidden; }
+.laxis { color: var(--text-color-alt); white-space: pre; }
+.lcat { cursor: crosshair; touch-action: pan-y; }
+.lcat:focus-visible { outline-offset: 0; }
+.lcells { display: flex; align-items: flex-end; height: var(--line-height); }
+.lcells > span { flex: 0 0 1ch; width: 1ch; height: 100%; padding-block: 3px; display: flex; align-items: flex-end; justify-content: center; }
+.lcells i { display: block; width: calc(1ch - 2px); background: var(--c); min-height: 2px; }
+.lcells > .out { margin-left: 1ch; }
+.lcells > .out i { background: transparent; border: 2px solid var(--c); min-height: 4px; }
+.lcells > .on { background: color-mix(in srgb, var(--text-color) 16%, transparent); }
+.chart-foot .sw-out { display: inline-block; width: calc(1ch - 2px); height: 10px; margin-right: 1ch; border: 2px solid var(--text-color-alt); }

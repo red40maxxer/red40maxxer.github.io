@@ -1,0 +1,55 @@
+:root {
+  --font-family: "Unifont", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* px, not rem: MW drops the root to 14px under 480px, which blurs a pixel font */
+  font-size: 16px;
+  --line-height: 20px;
+  /* Unifont has one weight; bold is synthesized, italics are not */
+  --font-weight-normal: 400;
+  --font-weight-medium: 400;
+  --font-weight-bold: 700;
+  font-synthesis: weight;
+  -webkit-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+}
+
+:root[data-font="smooth"] {
+  --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  font-size: 15px;
+  --line-height: 20px;
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+}
+
+/* MW caps the body at 80ch; Unifont's 8px cell makes that only 640px wide */
+:root { --page-width: 120ch; }
+body { max-width: calc(min(var(--page-width), round(down, 100%, 1ch))); }
+
+em { font-style: normal; text-decoration: underline dotted; text-underline-offset: 3px; }
+
+:root {
+  --accent: #1f5fd1; --ok: #217a3c; --warn: #9a6100; --bad: #b3261e;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #7aa7ff; --ok: #6cc98a; --warn: #e5b45a; --bad: #ff8a80;
+    color-scheme: dark;
+  }
+}
+:focus-visible { outline: var(--border-thickness) solid var(--accent); outline-offset: 2px; }
+
+/* MW right-aligns the last header cell; keep the title left when it is the only one */
+.header td:first-child { text-align: left; }
+
+button[aria-pressed="true"] { background: var(--text-color); color: var(--background-color); }
+
+.muted { color: var(--text-color-alt); }
+.num { text-align: right; }
+
+.row { display: flex; flex-wrap: wrap; gap: var(--line-height) 1ch; align-items: center; }
+.row > * { margin-top: 0; }
+.row > label { display: inline-block; width: auto; }
+
+/* MW nudges tables down half a line; leave room so the bottom border isn't clipped */
+.scroll { overflow-x: auto; padding-bottom: calc(var(--line-height) / 2); }
+.scroll > table { margin-bottom: 0; }
